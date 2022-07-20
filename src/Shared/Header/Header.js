@@ -1,6 +1,15 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from "react-router-dom";
+import auth from '../../firebase.init';
 const Header = () => {
+    const [user] = useAuthState(auth);
+
+    const handleSignOut = () => {
+        signOut(auth);
+
+    };
     return (
         <div className="navbar bg-base-100">
             <div className="navbar-start">
@@ -11,6 +20,17 @@ const Header = () => {
                     <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                         <li>  <Link to="/home">Home</Link></li>
                         <li>  <Link to="/about">About</Link></li>
+                        {
+                            user ?
+                                <>
+                                    <li> <Link onClick={handleSignOut} to="/login"> Log Out</Link> </li>
+                                </>
+                                :
+                                <>
+                                    <li>  <Link to="/login">Log In</Link> </li>
+                                    <li>  <Link to="/register">Register</Link> </li>
+                                </>
+                        }
                     </ul>
                 </div>
                 <Link className="btn btn-ghost normal-case text-xl" to="/home">Computer Zone</Link>
@@ -20,6 +40,17 @@ const Header = () => {
 
                     <li>  <Link to="/home">Home</Link></li>
                     <li>  <Link to="/about">About</Link></li>
+                    {
+                        user ?
+                            <>
+                                <li> <Link onClick={handleSignOut} to="/login"> Log Out</Link> </li>
+                            </>
+                            :
+                            <>
+                                <li>  <Link to="/login">Log In</Link> </li>
+                                <li>  <Link to="/register">Register</Link> </li>
+                            </>
+                    }
 
 
                 </ul>
