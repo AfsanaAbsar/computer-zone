@@ -3,7 +3,7 @@ import Social from './Social';
 import { useForm } from "react-hook-form";
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../firebase.init';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../Shared/Loading';
 
 const Login = () => {
@@ -22,8 +22,10 @@ const Login = () => {
     }
 
     const navigate = useNavigate();
+    const location = useLocation();
+    let from = location.state?.from?.pathname || "/";
     if (user) {
-        navigate('/home');
+        navigate(from, { replace: true });
     }
     if (loading) {
         return <Loading></Loading>

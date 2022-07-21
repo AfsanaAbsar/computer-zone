@@ -8,6 +8,7 @@ import About from './Pages/About/About';
 import Register from './User/Register';
 import Login from './User/Login';
 import OrderDetails from './Pages/Home/OrderDetails';
+import RequireAuth from './User/RequireAuth';
 function App() {
   return (
     <div>
@@ -17,7 +18,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="home" element={<Home />} />
         <Route path="about" element={<About></About>} />
-        <Route path="/products/:productId" element={<OrderDetails></OrderDetails>} />
+        <Route path="/products/:productId" element={<RequireAuth><OrderDetails></OrderDetails></RequireAuth>} />
         <Route path="register" element={<Register></Register>} />
         <Route path="login" element={<Login></Login>} />
       </Routes>
