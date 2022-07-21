@@ -101,7 +101,7 @@ const Register = () => {
                             <p className='text-red-500'> {registerError}</p>
                             <div className="form-control mt-6">
 
-                                <input type="submit" value="Register" className="input w-full mb-4 bg-gradient-to-r from-secondary  to-primary text-white font=bold text-lg border-none" />
+                                <input type="submit" value="Register" className="input w-full mb-4 bg-primary text-white font=bold text-lg border-none" />
                             </div>
                         </div>
                     </div>

@@ -4,13 +4,17 @@ import ProductDetails from './ProductDetails';
 const ProductArea = () => {
     const [products, setProducts] = useProducts()
     return (
-        <div className='grid grid-cols-3 gap-10'>
-            {
-                products.map(product => <ProductDetails
-                    key={product._id}
-                    product={product}
-                ></ProductDetails>)
-            }
+        <div>
+            <h1 className='text-center text-primary uppercase text-3xl font-bold'>Our Products</h1>
+            <div className='grid lg:grid-cols-3 sm:grid-cols-1 gap-10'>
+
+                {
+                    products.map(product => <ProductDetails
+                        key={product._id}
+                        product={product}
+                    ></ProductDetails>)
+                }
+            </div>
         </div>
     );
 };

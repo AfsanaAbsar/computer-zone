@@ -83,7 +83,7 @@ const Login = () => {
                             <p className='text-red-500'> {signInError}</p>
                             <div className="form-control mt-6">
 
-                                <input type="submit" value="Log In" className="input w-full mb-4 bg-gradient-to-r from-secondary  to-primary text-white font=bold text-lg border-none" />
+                                <input type="submit" value="Log In" className="input w-full mb-4 bg-primary text-white font=bold text-lg border-none" />
                             </div>
                         </div>
                     </div>
