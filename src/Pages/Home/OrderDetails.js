@@ -1,15 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-
+import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import auth from '../../firebase.init';
+import Loading from '../../Shared/Loading';
 
 
 const OrderDetails = () => {
     const { productId } = useParams();
     const [product, setProduct] = useState({})
     const [user] = useAuthState(auth);
-    //fetching single data by id 
+    // const { data: product, isLoading, refetch } = useQuery('product', () => fetch(`http://localhost:5000/products/${productId}`)
+    //     .then(res => res.json()))
+
+    // if (isLoading) {
+    //     return <Loading></Loading>
+    // }
+    // console.log(product);
+
+    // fetching single data by id 
     useEffect(() => {
         const url = `http://localhost:5000/products/${productId}`
 
@@ -82,7 +91,7 @@ const OrderDetails = () => {
                                 <span className="label-text">Quantity</span>
                             </label>
                             <div className="form-control">
-                                <input type="number" name='quantity' min={product.minOrder} max={product.quantity} className="input input-bordered mb-4" />
+                                <input required type="number" name='quantity' min={product.minOrder} max={product.quantity} className="input input-bordered mb-4" />
                             </div>
                             <div className="form-control">
                                 <input type="submit" value="Place Order" className="input input-bordered mb-4 bg-primary text-white" />
@@ -100,11 +109,3 @@ const OrderDetails = () => {
 export default OrderDetails;
 
 
-{/* <h1>{user?.displayName}</h1>
-<h1>{user?.email}</h1>
-
-<h1>{product.name}</h1>
-<img src={product.img} alt="" />
-<h1>{product.price}</h1>
-<h1>{product.quantity}</h1>
-<h1>{product.minOrder}</h1> */}

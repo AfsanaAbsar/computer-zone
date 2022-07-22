@@ -21,6 +21,9 @@ const Header = () => {
                         <li>  <Link to="/home">Home</Link></li>
                         <li>  <Link to="/about">About</Link></li>
                         {
+                            user && <li><Link to="/dashboard">Dashboard</Link> </li>
+                        }
+                        {
                             user ?
                                 <>
                                     <li> <Link onClick={handleSignOut} to="/login"> Log Out</Link> </li>
@@ -40,6 +43,10 @@ const Header = () => {
 
                     <li>  <Link to="/home">Home</Link></li>
                     <li>  <Link to="/about">About</Link></li>
+
+                    {
+                        user && <li><Link to="/dashboard">Dashboard</Link> </li>
+                    }
                     {
                         user ?
                             <>
