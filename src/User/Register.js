@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import auth from '../firebase.init'
 import { useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../Shared/Loading';
+import useToken from '../hooks/useToken';
 const Register = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [
@@ -22,11 +23,12 @@ const Register = () => {
         await updateProfile({ displayName: data.name });
         console.log('updated')
     }
-
+    const [token] = useToken(user);
     const navigate = useNavigate();
     const location = useLocation();
+
     let from = location.state?.from?.pathname || "/";
-    if (user) {
+    if (token) {
         navigate(from, { replace: true });
     }
     if (loading) {
@@ -35,7 +37,7 @@ const Register = () => {
 
     let registerError;
     if (error) {
-        registerError = <p>{error?.message}</p>
+        registerError = <span>{error?.message}</span>
     }
 
     return (

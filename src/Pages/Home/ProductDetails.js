@@ -8,14 +8,16 @@ const ProductDetails = ({ product }) => {
     }
     return (
         <div>
-            <div className="card w-100 h-100 bg-base-100 shadow-xl">
+            <div className="card w-96  bg-base-100 shadow-xl">
                 <figure><img src={product.img} alt={product.name} /></figure>
                 <div className="card-body">
                     <h2 className="card-title text-center">
                         {product.name}
 
                     </h2>
-                    <p>{product.description}</p>
+                    <div>
+                        <p>{product.description}</p>
+                    </div>
                     <h2 className='font-bold text-xl text-center'>Price : $ {product.price}</h2>
                     <div className="card-actions justify-center mt-6">
                         <div className="badge badge-outline">Quantity: {product.quantity}</div>

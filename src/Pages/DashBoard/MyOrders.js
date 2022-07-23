@@ -9,7 +9,10 @@ const MyOrders = () => {
 
         if (user) {
             fetch(`http://localhost:5000/order?buyerEmail=${user.email}`, {
-                method: 'GET'
+                method: 'GET',
+                headers: {
+                    'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                }
             })
                 .then(res => res.json())
                 .then(data => {

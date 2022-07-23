@@ -1,22 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useQuery } from 'react-query';
+
 import { useParams } from 'react-router-dom';
 import auth from '../../firebase.init';
-import Loading from '../../Shared/Loading';
+
 
 
 const OrderDetails = () => {
     const { productId } = useParams();
     const [product, setProduct] = useState({})
     const [user] = useAuthState(auth);
-    // const { data: product, isLoading, refetch } = useQuery('product', () => fetch(`http://localhost:5000/products/${productId}`)
-    //     .then(res => res.json()))
 
-    // if (isLoading) {
-    //     return <Loading></Loading>
-    // }
-    // console.log(product);
 
     // fetching single data by id 
     useEffect(() => {

@@ -1,60 +1,55 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Pagination, Scrollbar, A11y } from 'swiper';
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+import ReviewMessage from './ReviewMessage';
 const Review = () => {
+    const [review, setReview] = useState([])
+    useEffect(() => {
+        fetch('http://localhost:5000/reviews', {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => setReview(data))
+    }, [review])
     return (
-        <div>
+        <>
             <h1 className='text-center text-primary uppercase text-3xl font-bold mt-12'>Our Clients</h1>
-            <div className='grid lg:grid-cols-3 sm:grid-cols-1 gap-10 mt-12'>
-                <div className="card w-96 bg-base-100 ">
-                    <figure className="px-10 pt-10">
-                        <div className="avatar">
-                            <div className="w-24 rounded-full">
-                                <img src="https://placeimg.com/192/192/people" />
-                            </div>
-                        </div>
-                    </figure>
-                    <div className="card-body items-center text-center">
-                        <h2 className="card-title">Shoes!</h2>
-                        <p>If a dog chews shoes whose shoes does he choose?</p>
-                        <div className="card-actions">
-                            <button className="btn btn-primary">Buy Now</button>
-                        </div>
-                    </div>
-                </div>
-                <div className="card w-96 bg-base-100 ">
-                    <figure className="px-10 pt-10">
-                        <div className="avatar">
-                            <div className="w-24 rounded-full">
-                                <img src="https://placeimg.com/192/192/people" />
-                            </div>
-                        </div>
-                    </figure>
-                    <div className="card-body items-center text-center">
-                        <h2 className="card-title">Shoes!</h2>
-                        <p>If a dog chews shoes whose shoes does he choose?</p>
-                        <div className="card-actions">
-                            <button className="btn btn-primary">Buy Now</button>
-                        </div>
-                    </div>
-                </div>
-                <div className="card w-96 bg-base-100 ">
-                    <figure className="px-10 pt-10">
-                        <div className="avatar">
-                            <div className="w-24 rounded-full">
-                                <img src="https://placeimg.com/192/192/people" />
-                            </div>
-                        </div>
-                    </figure>
-                    <div className="card-body items-center text-center">
-                        <h2 className="card-title">Shoes!</h2>
-                        <p>If a dog chews shoes whose shoes does he choose?</p>
-                        <div className="card-actions">
-                            <button className="btn btn-primary">Buy Now</button>
-                        </div>
-                    </div>
-                </div>
+
+            <div >
+                <Swiper
+                    modules={[Pagination, Scrollbar, A11y]}
+                    spaceBetween={50}
+                    slidesPerView={3}
+
+                    pagination={{ clickable: true }}
+                    scrollbar={{ draggable: true }}
+                    onSlideChange={() => console.log('slide change')}
+                    onSwiper={(swiper) => console.log(swiper)}
+                >
+
+                    {
+                        review?.map(reviewMessage => <SwiperSlide> <ReviewMessage
+
+                            reviewMessage={reviewMessage}
+                        ></ReviewMessage>
+                        </SwiperSlide>)
+
+                    }
+
+                </Swiper>
             </div>
-        </div>
+        </>
+
     );
 };
 
