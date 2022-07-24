@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { toast } from 'react-toastify';
 const CheckoutForm = ({ order }) => {
     // console.log(order);
     const { totalprice, _id, buyer, buyerEmail } = order;
@@ -14,7 +15,7 @@ const CheckoutForm = ({ order }) => {
     useEffect(() => {
         if (totalprice) {
             console.log(totalprice);
-            fetch("http://localhost:5000/create-payment-intent",
+            fetch("https://dry-headland-85365.herokuapp.com/create-payment-intent",
                 {
                     method: "POST",
                     headers: {
@@ -94,7 +95,7 @@ const CheckoutForm = ({ order }) => {
             order: _id,
             transactionId: paymentIntent.id
         }
-        fetch(`http://localhost:5000/order/${_id}`, {
+        fetch(`https://dry-headland-85365.herokuapp.com/order/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',
@@ -104,7 +105,7 @@ const CheckoutForm = ({ order }) => {
         }).then(res => res.json())
             .then(data => {
                 setProcessing(false);
-                console.log(data);
+                toast.success('Payment completed')
             })
 
     }
@@ -135,9 +136,9 @@ const CheckoutForm = ({ order }) => {
                 cardError && <p className='text-red-500'>{cardError}</p>
             }
             {
-                success && <div className='text-green-500'>
+                success && <div >
                     <p>{success}  </p>
-                    <p>Your transaction Id: <span className="text-orange-500 font-bold">{transactionId}</span> </p>
+                    <p>Your transaction Id: <span className=" font-bold">{transactionId}</span> </p>
                 </div>
             }
         </>

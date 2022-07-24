@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import Loading from '../../Shared/Loading';
 import AllOrderDetails from './AllOrderDetails';
 const ManageAllOrders = () => {
-    const { data: orders, isLoading } = useQuery('orders', () => fetch('http://localhost:5000/orders', {
+    const { data: orders, isLoading } = useQuery('orders', () => fetch('https://dry-headland-85365.herokuapp.com/orders', {
         method: 'GET',
         headers: {
             'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -34,6 +34,9 @@ const ManageAllOrders = () => {
                             <th>Email</th>
                             <th>Product</th>
 
+                            <th></th>
+                            <th></th>
+                            <th></th>
                             <th></th>
                         </tr>
                     </thead>

@@ -31,6 +31,9 @@ const Register = () => {
     if (token) {
         navigate(from, { replace: true });
     }
+    const navigateLogin = e => {
+        navigate('/login')
+    }
     if (loading) {
         return <Loading></Loading>
     }
@@ -97,8 +100,9 @@ const Register = () => {
                                     })} type="text" placeholder="password" className="input input-bordered" />
                                 {errors.password?.type === 'required' && <p className='text-red-400  pb-2'>{errors.password.message}</p>}
 
+
                                 <label className="label">
-                                    <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                                    <p className='text-center'>Already have an account? <span className='border-0 bg-dark text-primary font-bold' onClick={navigateLogin}>LOGIN</span></p>
                                 </label>
                             </div>
 

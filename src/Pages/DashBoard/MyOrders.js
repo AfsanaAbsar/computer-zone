@@ -9,7 +9,7 @@ const MyOrders = () => {
     useEffect(() => {
 
         if (user) {
-            fetch(`http://localhost:5000/order?buyerEmail=${user.email}`, {
+            fetch(`https://dry-headland-85365.herokuapp.com/order?buyerEmail=${user.email}`, {
                 method: 'GET',
                 headers: {
                     'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -26,7 +26,7 @@ const MyOrders = () => {
     const handleCancelOrder = id => {
         const proceed = window.confirm('Are You Sure You want To Delete?')
         if (proceed) {
-            const url = `http://localhost:5000/order/${id}`
+            const url = `https://dry-headland-85365.herokuapp.com/order/${id}`
 
             fetch(url, {
                 method: 'DELETE',
@@ -44,7 +44,7 @@ const MyOrders = () => {
         <div>
             My Orders : {orders.length}
             <div className="overflow-x-auto">
-                <table className="table w-full">
+                <table className="table w-1/3">
 
                     <thead>
                         <tr>
@@ -74,8 +74,8 @@ const MyOrders = () => {
                                 <td>
                                     {(order.totalprice && !order.paid) && <Link to={`/dashboard/payment/${order._id}`}><button className='btn btn-xs btn-success'>Pay</button></Link>}
                                     {(order.totalprice && order.paid) && <div>
-                                        <p><span className='text-success'>Paid</span></p>
-                                        <p>Transaction id: <span className='text-success'>{order.transactionId}</span></p>
+                                        <p><span className='text-success font-bold'>PAID</span></p>
+                                        <p>Transaction id: <span className='text-success '>{order.transactionId}</span></p>
                                     </div>}
 
 

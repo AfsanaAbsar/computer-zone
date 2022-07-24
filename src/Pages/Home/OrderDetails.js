@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+
+import React from 'react';
+import { toast } from 'react-toastify';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
@@ -13,7 +15,7 @@ const OrderDetails = () => {
     const [user] = useAuthState(auth);
 
 
-    const { data: product, isLoading, refetch } = useQuery('product', () => fetch(`http://localhost:5000/products/${productId}`, {
+    const { data: product, isLoading, refetch } = useQuery('product', () => fetch(`https://dry-headland-85365.herokuapp.com/products/${productId}`, {
         method: 'GET',
         headers: {
             'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -50,7 +52,7 @@ const OrderDetails = () => {
         }
 
 
-        fetch('http://localhost:5000/order', {
+        fetch('https://dry-headland-85365.herokuapp.com/order', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -67,7 +69,7 @@ const OrderDetails = () => {
         if (quantity) {
             const updatedQuantity = parseInt(quantity) - parseInt(orderQuantity);
 
-            const url = `http://localhost:5000/products/${productId}`
+            const url = `https://dry-headland-85365.herokuapp.com/products/${productId}`
             fetch((url), {
                 method: 'PUT',
                 headers: {
@@ -78,7 +80,7 @@ const OrderDetails = () => {
                 .then(res => res.json())
                 .then(data => {
 
-                    alert('Delivered Successfully')
+                    toast.success('Ordered Successfully')
                     refetch();
                 })
 

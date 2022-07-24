@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import Loading from '../../Shared/Loading';
 const ManageProducts = () => {
-    const { data: product, isLoading, refetch } = useQuery('product', () => fetch('http://localhost:5000/products', {
+    const { data: product, isLoading, refetch } = useQuery('product', () => fetch('https://dry-headland-85365.herokuapp.com/products', {
         method: 'GET',
         headers: {
             'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -19,11 +19,16 @@ const ManageProducts = () => {
 
     const handleDeleteProduct = id => {
         const proceed = window.confirm('Are You Sure You want To Delete?')
+
         if (proceed) {
-            const url = `http://localhost:5000/products/${id}`
+            const url = `https://dry-headland-85365.herokuapp.com/products/${id}`
 
             fetch(url, {
                 method: 'DELETE',
+                headers: {
+                    'content-type': 'application/json',
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                },
 
             })
                 .then(res => res.json())
@@ -68,6 +73,7 @@ const ManageProducts = () => {
                             <td>
                                 <button onClick={() => handleDeleteProduct(pd._id)} class="btn bg-red-500 btn-xs">Delete Product</button>
                             </td>
+
                         </tr>)
                     }
 

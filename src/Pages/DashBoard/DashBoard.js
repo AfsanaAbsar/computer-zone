@@ -16,12 +16,12 @@ const DashBoard = () => {
 
                 <Outlet></Outlet>
 
-                <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
+                <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open Side Bar</label>
 
             </div>
             <div className="drawer-side">
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                <ul className="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
+                <ul className="menu p-4 overflow-y-auto lg:w-80  bg-base-100 text-base-content">
                     <li><Link to='/dashboard/myprofile'>My Profile</Link></li>
 
                     {!admin &&

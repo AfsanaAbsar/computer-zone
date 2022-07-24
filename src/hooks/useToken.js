@@ -6,10 +6,11 @@ const useToken = (user) => {
         const email = user?.user?.email;
         const currentUser = { email: email };
         if (email) {
-            fetch(`http://localhost:5000/user/${email}`, {
+            fetch(`https://dry-headland-85365.herokuapp.com/user/${email}`, {
                 method: 'PUT',
                 headers: {
-                    'content-type': 'application/json'
+                    'content-type': 'application/json',
+
                 },
                 body: JSON.stringify(currentUser)
             })

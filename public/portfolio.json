@@ -1,0 +1,34 @@
+[
+    {
+        "name": "HTML5",
+        "img": "https://i.ibb.co/VL01Y0M/htmlportfoloio.png"
+    },
+    {
+        "name": "CSS",
+        "img": "https://i.ibb.co/JCkSpjF/cssportfolio.png"
+    },
+    {
+        "name": "BOOTSTRAP5",
+        "img": "https://i.ibb.co/CW8XQ1d/bootstrapportfolio.jpg"
+    },
+    {
+        "name": "TAILWIND CSS",
+        "img": "https://i.ibb.co/Rz3r2xX/tailcss.png"
+    },
+    {
+        "name": "JAVASCRIPT",
+        "img": "https://i.ibb.co/3dWbdXF/jsportfolio.png"
+    },
+    {
+        "name": "REACT JS",
+        "img": "https://i.ibb.co/30mVwzz/reactportfolio.png"
+    },
+    {
+        "name": "NODE JS",
+        "img": "https://i.ibb.co/RSkwgSw/nodeportfolio.png"
+    },
+    {
+        "name": "MONGODB",
+        "img": "https://i.ibb.co/qkvjk8g/mongoportfolio.png"
+    }
+]

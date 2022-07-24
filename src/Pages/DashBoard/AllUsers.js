@@ -5,7 +5,7 @@ import User from './User';
 const AllUsers = () => {
     const [users, setUsers] = useState([])
     useEffect(() => {
-        fetch('http://localhost:5000/user', {
+        fetch('https://dry-headland-85365.herokuapp.com/user', {
             method: 'GET',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -26,7 +26,7 @@ const AllUsers = () => {
                             <th>Index</th>
                             <th>User</th>
                             <th></th>
-                            <th></th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -46,10 +46,3 @@ const AllUsers = () => {
 
 export default AllUsers;
 
-
-// fetch('http://localhost:5000/user', {
-//     method: 'GET',
-//     headers: {
-//         authorization: `Bearer ${localStorage.getItem('accessToken')}`
-//     }
-// })

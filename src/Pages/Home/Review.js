@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Pagination, Scrollbar, A11y } from 'swiper';
+
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { useQuery } from 'react-query';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Loading from '../../Shared/Loading'
@@ -10,7 +10,7 @@ import 'swiper/css/scrollbar';
 import ReviewMessage from './ReviewMessage';
 const Review = () => {
     // const [review, setReview] = useState([])
-    const { data: review, isLoading } = useQuery('review', () => fetch('http://localhost:5000/reviews', {
+    const { data: review, isLoading } = useQuery('review', () => fetch('https://dry-headland-85365.herokuapp.com/reviews', {
         method: 'GET',
         headers: {
             'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -24,46 +24,39 @@ const Review = () => {
     }
 
 
-
-
-    // useEffect(() => {
-    //     fetch('http://localhost:5000/reviews', {
-    //         method: 'GET',
-    //         headers: {
-    //             'content-type': 'application/json',
-    //             authorization: `Bearer ${localStorage.getItem('accessToken')}`
-    //         }
-    //     })
-    //         .then(res => res.json())
-    //         .then(data => setReview(data))
-    // }, [review])
     return (
         <>
             <h1 className='text-center text-primary uppercase text-3xl font-bold mt-12'>Our Clients</h1>
 
             <div >
-                <Swiper
-                    modules={[Pagination, Scrollbar, A11y]}
-                    spaceBetween={50}
-                    slidesPerView={3}
 
-                    pagination={{ clickable: true }}
-                    scrollbar={{ draggable: true }}
-                    onSlideChange={() => console.log('slide change')}
-                    onSwiper={(swiper) => console.log(swiper)}
-                >
+                <div>
 
-                    {
-                        review?.map(reviewMessage => <SwiperSlide> <ReviewMessage
+                    <Swiper
+                        modules={[Navigation, Pagination, Scrollbar, A11y]}
+                        spaceBetween={50}
+                        slidesPerView={3}
+                        navigation
+                        pagination={{ clickable: true }}
+                        scrollbar={{ draggable: true }}
+                        onSlideChange={() => console.log('slide change')}
+                        onSwiper={(swiper) => console.log(swiper)}
+                    >
 
-                            reviewMessage={reviewMessage}
-                        ></ReviewMessage>
-                        </SwiperSlide>)
+                        {
+                            review?.map(reviewMessage => <SwiperSlide> <ReviewMessage
 
-                    }
+                                reviewMessage={reviewMessage}
+                            ></ReviewMessage>
+                            </SwiperSlide>)
 
-                </Swiper>
+                        }
+
+                    </Swiper>
+                </div>
             </div>
+
+
         </>
 
     );

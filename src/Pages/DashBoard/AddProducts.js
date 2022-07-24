@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-
+import { toast } from 'react-toastify';
 const AddProducts = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const [products, setProducts] = useState([])
     useEffect(() => {
-        fetch('http://localhost:5000/products')
+        fetch('https://dry-headland-85365.herokuapp.com/products'
+        )
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [])
@@ -38,7 +39,7 @@ const AddProducts = () => {
 
                     //send data to database
 
-                    fetch('http://localhost:5000/products', {
+                    fetch('https://dry-headland-85365.herokuapp.com/products', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',
@@ -52,11 +53,11 @@ const AddProducts = () => {
                         .then(inserted => {
                             console.log('inserted', inserted);
                             if (inserted.insertedId) {
-                                alert('product added successfully');
+                                toast.success('Product added successfully')
                                 reset();
                             }
                             else {
-                                alert('couldnot add a product')
+                                toast.success('Could not add a product')
                             }
                         })
                 }

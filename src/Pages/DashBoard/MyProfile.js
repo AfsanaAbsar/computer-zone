@@ -3,12 +3,13 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import Loading from '../../Shared/Loading';
 import { useQuery } from 'react-query';
+import { toast } from 'react-toastify';
 
 const MyProfile = () => {
     const [user] = useAuthState(auth)
-    // const [profile, setProfile] = useState([])
 
-    const { data, isLoading, refetch } = useQuery('data', () => fetch(`http://localhost:5000/userProfile/${user.email}`, {
+
+    const { data, isLoading, refetch } = useQuery('data', () => fetch(`https://dry-headland-85365.herokuapp.com/user/${user.email}`, {
         method: 'GET',
         headers: {
             'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -41,7 +42,7 @@ const MyProfile = () => {
 
         }
 
-        fetch(`http://localhost:5000/userProfile/${user.email}`, {
+        fetch(`https://dry-headland-85365.herokuapp.com/user/${user.email}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -52,6 +53,7 @@ const MyProfile = () => {
             .then(data => {
                 console.log(data);
                 e.target.reset();
+                toast.success('Profile updated')
                 refetch()
             })
 
@@ -60,23 +62,12 @@ const MyProfile = () => {
     }
 
 
-
-
-
-    // useEffect(() => {
-    //     fetch(`http://localhost:5000/userProfile/${user.email}`, {
-    //         method: 'GET'
-    //     })
-    //         .then(res => res.json())
-    //         .then(data => setProfile(data[0]))
-    // }, [user?.email])
-
     return (
 
         <div className='grid lg:grid-cols-2 sm:grid-cols-1 gap-10'>
 
             <div className=''>
-                <div className="card w-96 bg-white text-primary">
+                <div className="card w-96 bg-white">
                     <div className="card-body">
                         <h2 className="card-title">User : {user?.displayName}</h2>
                         <p>Phone : {data[0].phone}</p>

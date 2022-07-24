@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-
+import { toast } from 'react-toastify';
 
 const MyReviews = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
@@ -13,7 +13,7 @@ const MyReviews = () => {
 
         }
         console.log(review);
-        fetch('http://localhost:5000/reviews', {
+        fetch('https://dry-headland-85365.herokuapp.com/reviews', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -28,11 +28,11 @@ const MyReviews = () => {
             .then(inserted => {
                 console.log('inserted', inserted);
                 if (inserted.insertedId) {
-                    alert('Review added successfully');
+                    toast.success('Successfully added review')
                     reset();
                 }
                 else {
-                    alert('couldnot add a Review')
+                    toast.error('Could not add a review')
                 }
             })
     }

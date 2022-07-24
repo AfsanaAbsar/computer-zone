@@ -32,7 +32,9 @@ const Login = () => {
     if (loading) {
         return <Loading></Loading>
     }
-
+    const navigateRegister = e => {
+        navigate('/register')
+    }
     let signInError;
     if (error) {
         signInError = <p>{error?.message}</p>
@@ -80,7 +82,7 @@ const Login = () => {
                                 {errors.password?.type === 'required' && <p className='text-red-400  pb-2'>{errors.password.message}</p>}
 
                                 <label className="label">
-                                    <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                                    <p className='text-center'>New To COMPUTER ZONE? <span className='border-0 bg-dark text-primary font-bold' onClick={navigateRegister}>REGISTER</span></p>
                                 </label>
                             </div>
 
