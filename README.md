@@ -1,7 +1,12 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+## Project Name [COMPUTER ZONE](https://computer-zone-34c0d.web.app)
+## It is a computer manufacturer website
+** It is a website of multi functionality
+** user Can create account, login with email and password and google
+** user can order product, update their profile, cancel order and pay with card
+** an admin can manage all orders, delete products or add products, cancel order, and make another user an admin
 ## Available Scripts
 
 In the project directory, you can run:

@@ -1,5 +1,5 @@
 
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { Navigation, Pagination, A11y } from 'swiper';
 import { useQuery } from 'react-query';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Loading from '../../Shared/Loading'
@@ -33,12 +33,12 @@ const Review = () => {
                 <div>
 
                     <Swiper
-                        modules={[Navigation, Pagination, Scrollbar, A11y]}
+                        modules={[Navigation, Pagination, A11y]}
                         spaceBetween={50}
                         slidesPerView={3}
                         navigation
                         pagination={{ clickable: true }}
-                        scrollbar={{ draggable: true }}
+
                         onSlideChange={() => console.log('slide change')}
                         onSwiper={(swiper) => console.log(swiper)}
                     >

@@ -1,5 +1,6 @@
 import React from 'react';
 import Banner from './Banner';
+import Contact from './Contact';
 import Offer from './Offer';
 import ProductArea from './ProductArea';
 import Review from './Review';
@@ -13,6 +14,7 @@ const Home = () => {
             <ProductArea></ProductArea>
             <Offer></Offer>
             <Review></Review>
+            <Contact></Contact>
 
         </div>
     );
