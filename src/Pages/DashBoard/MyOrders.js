@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { Link } from 'react-router-dom';
 import auth from '../../firebase.init';
 
 const MyOrders = () => {
@@ -21,6 +22,24 @@ const MyOrders = () => {
                 });
         }
     }, [user])
+
+    const handleCancelOrder = id => {
+        const proceed = window.confirm('Are You Sure You want To Delete?')
+        if (proceed) {
+            const url = `http://localhost:5000/order/${id}`
+
+            fetch(url, {
+                method: 'DELETE',
+
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    const remaining = orders.filter(order => order._id !== id)
+                    setOrders(remaining)
+                })
+        }
+    }
     return (
         <div>
             My Orders : {orders.length}
@@ -36,7 +55,9 @@ const MyOrders = () => {
                             <th>Quantity</th>
                             <th>Phone</th>
                             <th>Address</th>
+                            <th>Total Price</th>
                             <th>Payment</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,18 +67,20 @@ const MyOrders = () => {
                                 <td>{order.buyer}</td>
                                 <td>{order.buyerEmail}</td>
                                 <td>{order.product}</td>
-                                <td>{order.quantity}</td>
+                                <td>{order.orderQuantity}</td>
                                 <td>{order.phone}</td>
                                 <td>{order.address}</td>
-                                {/* <td>
-                                {(a.price && !a.paid) && <Link to={`/dashboard/payment/${a._id}`}><button className='btn btn-xs btn-success'>Pay</button></Link>}
-                                {(a.price && a.paid) && <div>
-                                    <p><span className='text-success'>Paid</span></p>
-                                    <p>Transaction id: <span className='text-success'>{a.transactionId}</span></p>
-                                </div>}
+                                <td>{order.totalprice}</td>
+                                <td>
+                                    {(order.totalprice && !order.paid) && <Link to={`/dashboard/payment/${order._id}`}><button className='btn btn-xs btn-success'>Pay</button></Link>}
+                                    {(order.totalprice && order.paid) && <div>
+                                        <p><span className='text-success'>Paid</span></p>
+                                        <p>Transaction id: <span className='text-success'>{order.transactionId}</span></p>
+                                    </div>}
 
 
-                            </td> */}
+                                </td>
+                                <td>{(order.totalprice && !order.paid) && <button onClick={() => handleCancelOrder(order._id)} className='btn btn-xs btn-success'>Cancel Order</button>}</td>
                             </tr>)
                         }
 

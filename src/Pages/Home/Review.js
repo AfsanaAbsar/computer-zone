@@ -1,26 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import { Pagination, Scrollbar, A11y } from 'swiper';
-
+import { useQuery } from 'react-query';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
+import Loading from '../../Shared/Loading'
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import ReviewMessage from './ReviewMessage';
 const Review = () => {
-    const [review, setReview] = useState([])
-    useEffect(() => {
-        fetch('http://localhost:5000/reviews', {
-            method: 'GET',
-            headers: {
-                'content-type': 'application/json',
-                authorization: `Bearer ${localStorage.getItem('accessToken')}`
-            }
-        })
-            .then(res => res.json())
-            .then(data => setReview(data))
-    }, [review])
+    // const [review, setReview] = useState([])
+    const { data: review, isLoading } = useQuery('review', () => fetch('http://localhost:5000/reviews', {
+        method: 'GET',
+        headers: {
+            'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    }
+
+    ).then(res => res.json()));
+
+    if (isLoading) {
+        return <Loading></Loading>
+    }
+
+
+
+
+    // useEffect(() => {
+    //     fetch('http://localhost:5000/reviews', {
+    //         method: 'GET',
+    //         headers: {
+    //             'content-type': 'application/json',
+    //             authorization: `Bearer ${localStorage.getItem('accessToken')}`
+    //         }
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => setReview(data))
+    // }, [review])
     return (
         <>
             <h1 className='text-center text-primary uppercase text-3xl font-bold mt-12'>Our Clients</h1>
